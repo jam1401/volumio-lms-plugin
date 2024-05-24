@@ -21,7 +21,7 @@ if [ ! -f $INSTALLING ]; then
 			rm -rf /home/volumio/logitechmediaserver/*.*
 		fi
 		
-		BASE_URL="http://downloads.slimdevices.com/"
+		BASE_URL="https://lyrion.org/downloads/"
 		LATEST=$(curl -s $BASE_URL | grep LogitechMediaServer_v | cut -d' ' -f2 | tail -n 1 | cut -d'"' -f2)
 		FILE=$(curl -s $BASE_URL$LATEST | grep arm | grep deb | cut -d'"' -f2)
 		if [ $arch = "armv6l" ] || [ $arch = "armv7l" ] || [ $arch = "armv8l" ]
@@ -44,7 +44,8 @@ if [ ! -f $INSTALLING ]; then
 		echo "Installing downloaded package"
 		for f in /home/volumio/logitechmediaserver/logitechmediaserver*.deb; do dpkg -i "$f"; done
 		# Needed for SSL connections; e.g. github
-		apt-get install libio-socket-ssl-perl lame unzip -y
+		apt-get install libio-socket-ssl-perl lame unzip libcrypt-openssl-rsa-perl -y
+		apt-get install 
 		apt-get -f install -y
 		# These directories still use the old name; probably legacy code
 		echo "Fixing directory rights"
