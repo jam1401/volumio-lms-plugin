@@ -14,7 +14,7 @@
           "id": "open_webconfig",
           "element": "button",
           "label": "Lyrion Music Server",
-          "description": "Open the LMS webconsole",
+          "description": "Open the LMS webconsole (Not currently working)",
           "onClick": {
             "type": "openUrl",
             "url": "https://localhost:9000"
