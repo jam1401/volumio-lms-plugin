@@ -23,16 +23,16 @@ if [ ! -f $INSTALLING ]; then
 		
 		BASE_URL="https://lyrion.org/downloads/"
 		LATEST=$(curl -s $BASE_URL | grep LogitechMediaServer_v | cut -d' ' -f2 | tail -n 1 | cut -d'"' -f2)
-		FILE=$(curl -s $BASE_URL$LATEST | grep arm | grep deb | cut -d'"' -f2)
+		FILE=$(echo "$LATEST" | rev | cut -f 2- -d '.' | rev | sed 's/\(.*\)-/\1_/' )
 		if [ $arch = "armv6l" ] || [ $arch = "armv7l" ] || [ $arch = "armv8l" ]
 		then
 			ARCH_DOWNLOAD="arm"
-			FILE=$(curl -s $BASE_URL$LATEST | grep $ARCH_DOWNLOAD | grep deb | cut -d'"' -f2)
-			wget -O /home/volumio/logitechmediaserver/logitechmediaserver_arm.deb $BASE_URL$LATEST$FILE
+			#FILE=$(curl -s $BASE_URL$LATEST | grep $ARCH_DOWNLOAD | grep deb | cut -d'"' -f2)
+			wget -O /home/volumio/logitechmediaserver/logitechmediaserver_arm.deb $FILE"_arm.deb"
 		elif [ $arch = "i686" ] || [ $arch = "x86_64" ]; then
 			ARCH_DOWNLOAD="arm"
 			FILE=$(curl -s $BASE_URL$LATEST | grep $ARCH_DOWNLOAD | grep deb | cut -d'"' -f2)
-			wget -O /home/volumio/logitechmediaserver/logitechmediaserver.deb $BASE_URL$LATEST$FILE
+			wget -O /home/volumio/logitechmediaserver/logitechmediaserver.deb $LATEST$FILE
 		fi
 
 		# Move the binary to the expected directory
