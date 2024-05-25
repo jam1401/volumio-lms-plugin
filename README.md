@@ -1,3 +1,5 @@
+Code for Lyrion version of the Logitech Media Server is on **MAIN** branch
+
 # volumio-lms-plugin
 Manage Logitech Media Server in Volumio
 
